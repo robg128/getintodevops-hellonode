@@ -1,4 +1,4 @@
-pipeline {
+node  {
  agent {
   kubernetes {
    label 'slave-docker'
