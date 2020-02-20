@@ -1,4 +1,10 @@
-node {
+pipeline {
+ agent {
+  kubernetes {
+   label 'slave-docker'
+   defaultContainer 'docker'
+  }
+ }
     def app
 
     stage('Clone repository') {
@@ -10,6 +16,9 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
+container('maven') {
+		echo("Inside container")
+	        } //container
 
         app = docker.build("gcr.io/docker-demo-268422/getintodevops-hellonode")
     }
