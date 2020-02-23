@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("gcr.io/docker-demo-268422/getintodevops-hellonode")
+        app = docker.build("us.gcr.io/dark-arcade-269117/getintodevops-hellonode")
     }
 
     stage('Push image') {
@@ -19,7 +19,7 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://gcr.io', 'gcr:google-container-registry-project') {
+        docker.withRegistry('https://us.gcr.io', 'gcr:jenkins-continuous') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
