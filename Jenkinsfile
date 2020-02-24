@@ -1,10 +1,9 @@
 pipeline {
   agent any
-//    dockerTag = "${GIT_COMMIT}" + "-BUILD${BUILD_NUMBER}"
  environment {
    registry = 'gcr.io'
    appName = 'jobs-sam-indexer'
-COMMIT = sh(script: '{returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+   dockerTag = "-BUILD${BUILD_NUMBER}"
  }
 
 stages {
@@ -14,7 +13,7 @@ stages {
 
         checkout scm
         //shortCommit = sh returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-sh("echo '${COMMIT}'")
+sh("echo '${dockerTag}'")
 }
     }
 
