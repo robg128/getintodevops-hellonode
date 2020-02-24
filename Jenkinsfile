@@ -4,7 +4,7 @@ pipeline {
    registry = 'gcr.io'
    appName = 'getintodevops-hellonode'
    projectName = 'dark-arcade-269117'
-   dockerTag = "-BUILD${BUILD_NUMBER}"
+   dockerTag = "BUILD-${BUILD_NUMBER}"
  }
 
 stages {
