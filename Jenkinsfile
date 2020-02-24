@@ -1,5 +1,4 @@
 pipeline {
-    def app
 //    dockerTag = "${GIT_COMMIT}" + "-BUILD${BUILD_NUMBER}"
  environment {
    registry = 'gcr.io'
