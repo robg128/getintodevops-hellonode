@@ -4,6 +4,7 @@ pipeline {
  environment {
    registry = 'gcr.io'
    appName = 'jobs-sam-indexer'
+COMMIT = sh(script: '{returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()` 
  }
 
 stages {
@@ -12,8 +13,8 @@ stages {
          steps {
 
         checkout scm
-        shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim())
-sh("echo '${shortCommit}'")
+        //shortCommit = sh returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+sh("echo '${COMMIT}'")
 }
     }
 
