@@ -2,7 +2,7 @@ node {
     def app
 //    dockerTag = "${GIT_COMMIT}" + "-BUILD${BUILD_NUMBER}"
  environment {
-   registry = 'monsternext-jobs-docker-registry-local.jfrog.io'
+   registry = 'gcr.io
    appName = 'jobs-sam-indexer'
  }
 
@@ -15,11 +15,10 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
-sh("echo '${env.registry}'")
  sh("gcloud auth configure-docker")
 
 // sh("docker build --build-arg maven_settings=maven_settings.xml --network=host -t '${env.registry}'/'${env.appName}':${dockerTag} .")
-sh("docker build -t gcr.io/dark-arcade-269117/getintodevops-hellonode .")
+sh("docker build -t '${env.registry}'/dark-arcade-269117/getintodevops-hellonode .")
 
 //        app = docker.build("gcr.io/dark-arcade-269117/getintodevops-hellonode")
     }
