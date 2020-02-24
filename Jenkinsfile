@@ -1,6 +1,6 @@
 node {
     def app
-    dockerTag = "${GIT_COMMIT}" + "-BUILD${BUILD_NUMBER}"
+//    dockerTag = "${GIT_COMMIT}" + "-BUILD${BUILD_NUMBER}"
  environment {
    registry = 'monsternext-jobs-docker-registry-local.jfrog.io'
    appName = 'jobs-sam-indexer'
