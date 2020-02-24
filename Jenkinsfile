@@ -1,4 +1,5 @@
 pipeline {
+  agent any
 //    dockerTag = "${GIT_COMMIT}" + "-BUILD${BUILD_NUMBER}"
  environment {
    registry = 'gcr.io'
