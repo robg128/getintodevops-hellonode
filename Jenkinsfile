@@ -10,8 +10,12 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
+ sh("gcloud auth configure-docker")
 
-        app = docker.build("gcr.io/dark-arcade-269117/getintodevops-hellonode")
+// sh("docker build --build-arg maven_settings=maven_settings.xml --network=host -t '${env.registry}'/'${env.appName}':${dockerTag} .")
+sh("docker build -t gcr.io/dark-arcade-269117/getintodevops-hellonode .")
+
+//        app = docker.build("gcr.io/dark-arcade-269117/getintodevops-hellonode")
     }
 
     stage('Push image') {
@@ -19,9 +23,9 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://gcr.io', 'gcr:jenkins-continuous') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
+withCredentials([file(credentialsId: 'google', variable: 'GC_KEY')]) {
+    sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
+    sh("docker -- push gcr.io/dark-arcade-269117/getintodevops-hellonode:latest")
+  }
     }
 }
