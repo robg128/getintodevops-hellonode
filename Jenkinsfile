@@ -23,7 +23,7 @@ stages {
 
  sh("gcloud auth configure-docker")
 
-// sh("docker build  -t '${env.registry}'/'${projectName.registry}'/'${env.appName}':${dockerTag} .")
+// sh("docker build  -t '${env.registry}'/'${env.projectName}'/'${env.appName}':${dockerTag} .")
 // sh("docker build -t '${env.registry}'/dark-arcade-269117/getintodevops-hellonode .")
 
     }
@@ -37,7 +37,7 @@ stages {
          * Pushing multiple tags is cheap, as all the layers are reused. */
 withCredentials([file(credentialsId: 'google', variable: 'GC_KEY')]) {
     sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
-    sh("docker -- push '${env.registry}'/'${projectName.registry}'/'${env.appName}':${dockerTag}")
+    sh("docker -- push '${env.registry}'/'${env.projectName}'/'${env.appName}':${dockerTag}")
     //sh("docker -- push gcr.io/dark-arcade-269117/getintodevops-hellonode:latest")
 }
   }
