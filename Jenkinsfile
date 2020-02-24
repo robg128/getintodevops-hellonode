@@ -15,7 +15,7 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
-sh("echo ${env.registry}'")
+sh("echo '${env.registry}'")
  sh("gcloud auth configure-docker")
 
 // sh("docker build --build-arg maven_settings=maven_settings.xml --network=host -t '${env.registry}'/'${env.appName}':${dockerTag} .")
