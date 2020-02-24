@@ -1,4 +1,4 @@
-node {
+pipeline {
     def app
 //    dockerTag = "${GIT_COMMIT}" + "-BUILD${BUILD_NUMBER}"
  environment {
@@ -6,6 +6,7 @@ node {
    appName = 'jobs-sam-indexer'
  }
 
+stages {
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
 
@@ -33,4 +34,5 @@ withCredentials([file(credentialsId: 'google', variable: 'GC_KEY')]) {
     sh("docker -- push gcr.io/dark-arcade-269117/getintodevops-hellonode:latest")
   }
     }
+}
 }
