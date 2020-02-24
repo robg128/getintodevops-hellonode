@@ -23,7 +23,7 @@ stages {
 
  sh("gcloud auth configure-docker")
 
-// sh("docker build  -t '${env.registry}'/'${env.projectName}'/'${env.appName}':${dockerTag} .")
+sh("docker build  -t '${env.registry}'/'${env.projectName}'/'${env.appName}':${dockerTag} .")
 // sh("docker build -t '${env.registry}'/dark-arcade-269117/getintodevops-hellonode .")
 
     }
