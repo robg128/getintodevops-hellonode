@@ -4,7 +4,7 @@ pipeline {
  environment {
    registry = 'gcr.io'
    appName = 'jobs-sam-indexer'
-COMMIT = sh(script: '{returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()` 
+COMMIT = sh(script: '{returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
  }
 
 stages {
