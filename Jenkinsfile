@@ -2,7 +2,8 @@ pipeline {
   agent any
  environment {
    registry = 'gcr.io'
-   appName = 'jobs-sam-indexer'
+   appName = 'getintodevops-hellonode'
+   projectName = 'dark-arcade-269117'
    dockerTag = "-BUILD${BUILD_NUMBER}"
  }
 
@@ -12,8 +13,6 @@ stages {
          steps {
 
         checkout scm
-        //shortCommit = sh returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-sh("echo '${dockerTag}'")
 }
     }
 
@@ -24,10 +23,9 @@ sh("echo '${dockerTag}'")
 
  sh("gcloud auth configure-docker")
 
-// sh("docker build --build-arg maven_settings=maven_settings.xml --network=host -t '${env.registry}'/'${env.appName}':${dockerTag} .")
-sh("docker build -t '${env.registry}'/dark-arcade-269117/getintodevops-hellonode .")
+// sh("docker build  -t '${env.registry}'/'${projectName.registry}'/'${env.appName}':${dockerTag} .")
+// sh("docker build -t '${env.registry}'/dark-arcade-269117/getintodevops-hellonode .")
 
-//        app = docker.build("gcr.io/dark-arcade-269117/getintodevops-hellonode")
     }
 }
 
@@ -39,7 +37,8 @@ sh("docker build -t '${env.registry}'/dark-arcade-269117/getintodevops-hellonode
          * Pushing multiple tags is cheap, as all the layers are reused. */
 withCredentials([file(credentialsId: 'google', variable: 'GC_KEY')]) {
     sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
-    sh("docker -- push gcr.io/dark-arcade-269117/getintodevops-hellonode:latest")
+    sh("docker -- push '${env.registry}'/'${projectName.registry}'/'${env.appName}':${dockerTag}")
+    //sh("docker -- push gcr.io/dark-arcade-269117/getintodevops-hellonode:latest")
 }
   }
     }
