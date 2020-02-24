@@ -17,7 +17,7 @@ stages {
     stage('Build image') {
         steps {
 
-          sh("gcloud auth configure-docker")
+          // sh("gcloud auth configure-docker")
           sh("docker build  -t '${env.registry}'/'${env.projectName}'/'${env.appName}':${dockerTag} .")
 
         }
