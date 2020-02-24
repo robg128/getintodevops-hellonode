@@ -26,7 +26,9 @@ stages {
     stage('Push image') {
          steps {
            withCredentials([file(credentialsId: 'google', variable: 'GC_KEY')]) {
-             sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
+             // sh("docker login '${env.registry}' -u artifactory-cicd-pipeline-user -p '${artifactoryCred}'")
+             sh("cat ${GC_KEY} | docker login -u _json_key --password-stdin https://gcr.io")
+             // sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
              sh("docker -- push '${env.registry}'/'${env.projectName}'/'${env.appName}':${dockerTag}")
           }
          }
